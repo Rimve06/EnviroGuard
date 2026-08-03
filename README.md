@@ -291,5 +291,8 @@ Khulna University of Engineering & Technology (KUET)
 Bangladesh
 
 ---
+# Notes
+**The calibration values in given EnviroGuard.ino are given as per to the used sensor modules, Arduino board, and hardware configuration used during the development of this project. Hence different versions of sensors or arduino may not work properly under this given code. If you use different hardware, recalibration of the sensors and threshold values is recommended to ensure accurate performance. **
+---
 
 If you find this project useful, feel free to ⭐ the repository.
