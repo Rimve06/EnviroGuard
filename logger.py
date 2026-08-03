@@ -2,18 +2,18 @@ import serial
 import csv
 from datetime import datetime
 
-# ── CONFIG ──────────────────────────────────────────
+# CONFIG
 PORT     = "COM7"    # change to your Arduino's COM port
 BAUD     = 9600      # match your Serial.begin()
 CSV_FILE = "enviroguard_log.csv"
-# ────────────────────────────────────────────────────
 
-# ── EMAIL CONFIG ─────────────────────────────────────
+
+#  EMAIL CONFIG
 SEND_EMAIL        = True
 EMAIL_FROM        = "abc@gmail.com"
 EMAIL_PASSWORD    = "abc"  # NOT your real Gmail password
 EMAIL_TO          = "abc@gmail.com"
-# ─────────────────────────────────────────────────────
+
 
 HEADER = [
     "timestamp",
@@ -147,7 +147,7 @@ def main():
                     writer.writerow(parsed)
                     csvfile.flush()
 
-                    # ── people change detection ──────────────────────
+                    # people change detection 
                     current_people = int(parsed.get("people", 0))
                     if current_people != last_people[0]:
                         direction = "increased" if current_people > last_people[0] else "decreased"
@@ -164,7 +164,7 @@ def main():
                         )
                         send_email(subject, body)
                         last_people[0] = current_people
-                    # ─────────────────────────────────────────────────
+                    
 
                     print(f"[{parsed['timestamp']}] "
                           f"Temp={parsed.get('temp_c','?')}C  "
