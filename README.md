@@ -5,7 +5,10 @@ EnviroGuard is a smart IoT-based indoor environment and occupancy monitoring sys
 # 🌿 EnviroGuard 
 ### Smart Indoor Environment Monitoring & Occupancy Management System
 
-EnviroGuard is an Arduino-based smart environmental monitoring system that continuously measures indoor environmental conditions, estimates room occupancy, evaluates overall comfort, detects potential hazards, and logs sensor data for analysis. A companion Python application records data to CSV files and sends email notifications whenever the room occupancy changes.
+EnviroGuard is an Arduino-based smart environmental monitoring system that continuously measures indoor environmental conditions, estimates room occupancy, evaluates overall comfort, detects potential hazards, and logs sensor data for analysis. A companion Python application records sensor data into CSV files and automatically sends email notifications whenever room occupancy changes.
+
+The system combines multiple environmental sensors with occupancy detection to provide a complete overview of indoor conditions. During emergencies such as fire or gas leakage, occupancy information helps indicate whether a monitored room is occupied or has likely been evacuated, supporting emergency response. It can also be used as a portable environmental assessment tool for inspectors to quickly evaluate indoor conditions in restaurants, commercial kitchens, laboratories, offices, classrooms, and other workplaces.
+
 
 ---
 
@@ -31,9 +34,11 @@ EnviroGuard is an Arduino-based smart environmental monitoring system that conti
 
 The system continuously monitors multiple environmental parameters inside a room.
 
-Two ultrasonic sensors determine whether a person is entering or leaving the room. Environmental sensors collect temperature, humidity, gas concentration, light intensity, and sound level. The Arduino processes these readings, evaluates room comfort, updates the LCD display, and activates alarms when necessary.
+Two ultrasonic sensors determine whether a person is entering or leaving the room. Environmental sensors collect temperature, humidity, gas concentration, light intensity, and sound level. The Arduino processes these readings, evaluates room comfort, updates the LCD display, activates alarms when necessary, and continuously tracks room occupancy.
 
-A Python application receives sensor data through serial communication, stores it in a CSV file, and sends email notifications whenever the occupancy changes.
+A Python application receives sensor data through serial communication, stores every reading in a CSV file, and automatically sends email notifications whenever the occupancy changes.
+
+During emergencies, the occupancy count can help indicate whether a monitored room is still occupied or has likely been evacuated. For inspections, the prototype provides a quick overview of environmental conditions such as gas leakage, smoke, temperature, humidity, lighting, and noise using a single portable device.
 
 ---
 
@@ -135,7 +140,7 @@ When smoke exceeds the threshold:
 
 The Python application stores every sensor reading inside:
 
-``
+```
 enviroguard_log.csv
 ```
 
@@ -168,31 +173,8 @@ Whenever the occupancy changes, the Python application automatically sends an em
 
 ---
 
-# Repository Structure
 
-```
-EnviroGuard/
-│
-├── Arduino/
-│   └── EnviroGuard.ino
-│
-├── Python/
-│   └── logger.py
-│
-├── Images/
-│   ├── prototype.jpg
-│   ├── lcd.jpg
-│   ├── circuit.png
-│   └── system_architecture.png
-│
-├── Report/
-│   └── EnviroGuard_Report.pdf
-│
-├── README.md
-└── LICENSE
-```
 
----
 
 # How to Run
 
@@ -240,19 +222,30 @@ python logger.py
 - Hostels
 - Warehouses
 - Indoor environmental monitoring
+- Restaurant and commercial kitchen environmental assessment
+- Consumer rights and safety inspections for evaluating indoor environmental conditions
+- Workplace safety monitoring
 - Educational IoT projects
+- Emergency evacuation support by indicating whether a monitored room is occupied
+- Disaster response support by providing occupancy information alongside environmental conditions
+- Environmental data collection for research and analysis
 
 ---
 
 # Limitations
 
-- Designed for single-person entry/exit detection.
+- Designed primarily for single-person entry/exit detection.
 - Ultrasonic counting accuracy decreases if multiple people pass simultaneously.
+- Occupancy count estimates whether a monitored room is occupied but cannot confirm someone is trapped or determine their exact location.
+- During emergencies, the system should be used only as a decision-support tool alongside professional rescue procedure.
+- The system evaluates environmental conditions but cannot directly determine food hygiene,       cleanliness, or sanitation standards.
 - MQ sensors require calibration and periodic recalibration.
 - Email notifications require a connected computer with internet access.
-- Monitoring is limited to a single room.
+- Monitoring is limited to the sensor coverage area.
 - Uses wired serial communication.
-- Fire detection relies primarily on smoke concentration.
+- Fire detection primarily relies on smoke concentration.
+
+
 
 ---
 
@@ -272,7 +265,6 @@ python logger.py
 
 # Sample Output
 
-```
 People:      3
 Temp:        28.6 C
 Humidity:    61.2 %
@@ -289,7 +281,7 @@ Slightly Humid
 
 # Authors
 
-**Tasmin Rubaiyat Rimve**
+**Tasmin Rubaiyat Rimve**  
 **Sadman Sakib Mugdho**
 
 Computer Science & Engineering
